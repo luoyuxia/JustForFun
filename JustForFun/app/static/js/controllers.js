@@ -35,21 +35,6 @@ var helloWorldControllers = angular.module('helloWorldControllers', []).factory(
                 })
             })
         },
-        //移除对应的事件,listeners_remove表示事件名称列表
-        removeListeners: function (listeners_remove) {
-            for (var listener in socket._callbacks) {
-                if (listener != undefined) {
-                    for(var i = 0;i<listeners_remove.length;i++)
-                    {
-                        //如果事件名称对应，则将该事件置为空
-                        if(listener.indexOf(listeners_remove[i])>=0)
-                        {
-                            socket._callbacks[listener] = null;
-                        }
-                    }
-                }
-            }
-        }
     }
 }).run(function($rootScope,$window,socket,$http) {
     $rootScope.hasLogin = false;
@@ -228,7 +213,7 @@ helloWorldControllers.controller('LoginCtrl',['$scope','$http','$modal','$rootSc
                 $rootScope.currentUserId = 0;
                 token = "";
                 $location.path("/");
-                $rootScope.messages_info = [];
+                $rootScope.messages = [];
                 toastr.success("退出登录成功");
             });
 
