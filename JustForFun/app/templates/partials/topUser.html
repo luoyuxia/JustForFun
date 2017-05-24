@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="col-xs-12 col-md-8 col-md-push-2">
+        <div class="panel panel-success">
+            <h3 class="panel-heading">
+                顶级玩家
+            </h3>
+            <div class="panel-body">
+            <table class="table small table-striped table-hover">
+                <thead>
+                <tr>
+                    <td>排名</td>
+                    <td>玩家姓名</td>
+                    <td>最高得分</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="user in topUsers" ng-class="{true: 'alert-info', false: ''}[isCurrentUser(user)]">
+                    <td>
+                        <i ng-show="$index < 3" class="fa fa-star alert-success"></i>
+                        <i ng-show="$index>=3" class="fa fa-flag alert-success"></i>
+                        <span>{{$index+1}}</span>
+                    </td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.maxScore}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        </div>
+    </div>
+</div>

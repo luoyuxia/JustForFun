@@ -1,0 +1,243 @@
+<style>
+    hr{
+        height: 1px;!important;
+        margin-top: 1px;!important;
+        margin-bottom: 1px;!important;
+        border-top: solid red;!important;
+    }
+    textarea
+    {
+        width: 100%;
+        height: 100%;
+        resize: none;
+        word-wrap: normal;
+    }
+    #chatContent
+    {
+        height: 200px;
+        overflow: auto;
+        font-size: 15px!important;
+        color: black!important;
+    }
+    #chatbar
+    {
+        height: 25px;
+        overflow: auto
+    }
+    .chat_message
+    {
+        word-wrap: break-word;
+        width: 80%
+    }
+    .send_message
+    {
+        word-wrap: break-word;
+        width: 80%;
+        margin-left: 20%;
+        text-align: right;
+    }
+    .receive_message
+    {
+        word-wrap: break-word;
+        width: 80%;
+        margin-left: 0;
+        text-align: left;
+    }
+
+    #chatBox
+    {
+        height: 100px; background: white; overflow: auto
+    }
+    #footer
+    {
+        height: 35px;
+    }
+    #userList
+    {
+        overflow: auto;height: 400px
+    }
+    #seeMore:hover
+    {
+        cursor: pointer;
+    }
+</style>
+ <link rel="stylesheet" href="../../static/css/AdminLTE.min.css">
+ <link rel="stylesheet" href="../../static/css/skin-blue.min.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+<div class="container" ng-show="hasLogin">
+    <div class="row col-md-12" >
+   <div id="friendsList" class="col-md-4" >
+        <div class="list-group">
+            <a  class="list-group-item active">
+                {{title}}
+            </a>
+            <div id="userList">
+                <a ng-repeat="friend in friends" class="list-group-item list-group-item-action" ng-dblclick="chatWith(friend)">
+                   <span class="product-img">
+                        <img style="height: 45px;width: 45px;" ng-src="{{'/getImage/'+friend.personal_image}}" alt="好友图像">
+                   </span>
+                    {{friend.username}}
+                    <i ng-show="friend.is_online" class="fa fa-user pull-right" style="color: green"></i>
+                    <i ng-show="!friend.is_online" class="fa fa-user pull-right" style="color: gray"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+                  <!-- PRODUCT LIST -->
+    <!--    <div class="col-md-4">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">我的好友</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <!-- /.box-header
+            <div class="box-body">
+              <ul class="products-list product-list-in-box" style="height: 400px">
+                <li class="item" ng-repeat="friend in friends" ng-dblclick="chatWith(friend)">
+                    <div class="product-img">
+                        <img ng-src="{{friend.image}}" alt="好友图像">
+                    </div>
+                    <div class="product-info">
+                        <span class="lable pull-right">
+                            <i ng-show="friend.is_online" class="fa fa-user pull-right" style="color: green"></i>
+                            <i ng-show="!friend.is_online" class="fa fa-user pull-right" style="color: gray"></i>
+                        </span>
+                        <span class="product-description">
+                            {{friend.username}}
+                        </span>
+                    </div>
+                </li>
+              </ul>
+            <!-- /.box-footer
+          </div>
+
+            </div>
+        </div>
+         -->
+  <!--  <div id="chatDialog" class="col-md-8" ng-show="privateChatUser!=null">
+        <div class="list-group">
+            <a class="list-group-item active">
+            {{privateChatUser.username}}
+            <span class="pull-right fa fa-times" ng-click="close()">
+
+            </span>
+            </a>
+            <div id = "chatContent" auto-scroll="">
+                <span id="seeMore" style="margin-left: 40%"><i class="fa fa-clock-o"></i>查看更多信息</span>
+                <a  ng-repeat="privateChatRecord in privateChatRecords" class="list-group-item list-group-item-info">
+
+                    <div ng-class="{true: 'receive_message', false: 'send_message'}[privateChatRecord.isReceive]">
+                        <span style="font: 黑体;font-size: 10px; margin-right: 0">
+                         <i class="fa fa-clock-o">
+                         </i>
+                       <span>{{privateChatRecord.sendTime}}</span>
+                    </span><br>
+                        {{privateChatRecord.content}}
+                    </div>
+                </a>
+            </div>
+            <hr>
+       <!--     <div id="chatBar">
+                聊天选项
+            </div>
+            <hr>
+            <div id="chatBox">
+                <textarea ng-model="message">
+
+                </textarea>
+            </div>
+            <div id="footer">
+                <span style="background: green" ng-class="{true: 'disabled', false: ''}[message=='']" ng-click="sendMessage()" class="btn btn-sm btn-default pull-right">
+                  <i class="fa fa-plane">发送信息</i>
+                </span>
+            </div>
+        </div>
+    </div> -->
+    <div class="col-md-8 col-xs-12 " ng-show="privateChatUser!=null">
+        <!-- DIRECT CHAT PRIMARY -->
+        <div class="box box-success direct-chat direct-chat-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">{{privateChatUser.username}}</h3>
+
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-warning btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-warning btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle">
+                        <i class="fa fa-comments"></i></button>
+                   <button type="button" ng-click="close()" class="btn btn-danger btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+                <!-- Conversations are loaded here -->
+                <div class="direct-chat-messages" style="height: 300px" auto-scroll="">
+                    <!-- Message. Default to the left -->
+                    <div ng-repeat="privateChatRecord in privateChatRecords track by $index" class="direct-chat-msg" ng-class="{true: 'right', false: ''}[!privateChatRecord.isReceive]">
+                        <div class="direct-chat-info clearfix">
+                            <span class="direct-chat-name " ng-class="{true: 'pull-right', false: 'pull-left'}[!privateChatRecord.isReceive]">{{privateChatRecord.sender.username}}</span>
+                            <span class="direct-chat-timestamp" ng-class="{true: 'pull-left', false: 'pull-right'}[!privateChatRecord.isReceive]">{{privateChatRecord.sendTime}}</span>
+                        </div>
+                        <!-- /.direct-chat-info -->
+                       <img class="direct-chat-img" ng-src="{{privateChatRecord.sender.image}}" alt="Message User Image">
+                            <!-- /.direct-chat-img -->
+                        <div class="direct-chat-text" style="word-wrap:break-word">
+                           {{privateChatRecord.content}}
+                        </div>
+                        <!-- /.direct-chat-text -->
+                    </div>
+                    <!-- /.direct-chat-msg -->
+                </div>
+                <!--/.direct-chat-messages-->
+
+                <!-- Contacts are loaded here -->
+                <div class="direct-chat-contacts">
+                    <ul class="contacts-list">
+                        <li>
+                            <a href="#">
+                                <img class="contacts-list-img" ng-src="{{privateChatUser.image}}" alt="User Image">
+
+                                <div class="contacts-list-info">
+                            <span class="contacts-list-name">
+                              Count Dracula
+                              <small class="contacts-list-date pull-right">2/28/2015</small>
+                            </span>
+                                    <span class="contacts-list-msg">How have you been? I was...</span>
+                                </div>
+                                <!-- /.contacts-list-info -->
+                            </a>
+                        </li>
+                        <!-- End Contact Item -->
+                    </ul>
+                    <!-- /.contatcts-list -->
+                </div>
+                <!-- /.direct-chat-pane -->
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <div class="input-group">
+                    <input type="text" ng-model="message" name="message" placeholder="在此输入信息" class="form-control">
+                    <span class="input-group-btn">
+                        <button ng-class="{true: 'disabled', false: ''}[message=='']" ng-click="sendMessage()"  class="btn btn-info waves-effect waves-light">发送</button>
+                    </span>
+                </div>
+            </div>
+            <!-- /.box-footer-->
+        </div>
+        <!--/.direct-chat -->
+    </div>
+
+   </div>
+</div>
+<div ng-show="!hasLogin">
+    <div class="jumbotron">
+        <div class="alert alert-info" role="alert">
+         <i class="fa fa-flash big"></i> 对不起！ 你还没有登录
+        </div>
+    </div>
+</div>

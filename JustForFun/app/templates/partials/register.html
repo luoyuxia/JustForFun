@@ -1,0 +1,42 @@
+<div class="card">
+    <div class="card-block">
+
+        <!--Header-->
+        <div class="form-header blue-gradient">
+            <h3><i class="fa fa-user"></i> 注册</h3>
+        </div>
+
+        <!--Body-->
+        <div class="md-form">
+            <i class="fa fa-qq prefix"></i>
+            <input type="text" id="form3" class="form-control" ng-model="account">
+            <label for="form3">账号</label>
+        </div>
+        <div class="md-form">
+            <i class="fa fa-user prefix"></i>
+            <input type="text" id="form2" class="form-control" ng-model="username">
+            <label for="form2">用户名</label>
+        </div>
+
+        <div class="md-form">
+            <i class="fa fa-lock prefix"></i>
+            <input type="password" id="form4" class="form-control" ng-model="password">
+            <label for="form4">密码</label>
+        </div>
+
+        <div class="text-center">
+            <button ng-click="register()" class="btn btn-indigo waves-effect">注册</button>
+            <hr>
+            <fieldset class="form-group">
+                <input type="checkbox" id="checkbox1" name="hasAgree"
+                       ng-true-value="true" ng-false-value="false" ng-model="hasAgree"
+                       ng-change="change()">
+                <label for="checkbox1">自觉遵守网站条款</label>
+            </fieldset>
+        </div>
+        <div class="text-center">
+            <span style="color: red">{{errorMessage}}</span>
+        </div>
+
+    </div>
+</div>

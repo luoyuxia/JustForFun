@@ -1,0 +1,145 @@
+<style type="text/css">
+    #pan div.group
+    {
+        margin-bottom: 10%;
+        margin-top: 10%;
+    }
+    #level,#score
+    {
+        text-align: center;
+        width: 100%;
+        font-size: 36px;
+        text-shadow: -4px -4px -4px -4px; !important;
+    }
+    .c1{
+        border: 3px #bb3627 outset;
+        background: -webkit-gradient(linear,left top,right bottom,color-stop(0%,#efc9c5),
+        color-stop(50%,#bb3627),color-stop(50%,#d2594c),color-stop(100%,#f1998f)
+        );
+    }
+
+    .c2
+    {
+        border: 3px #4cd24c outset;
+        background: -webkit-gradient(linear,left top,right bottom,color-stop(0%,#c5efc5),
+        color-stop(50%,#4cd24c),color-stop(51%,#27bb27),color-stop(100%,#8ff18f)
+        );
+    }
+    .c3
+    {
+        border: 3px #4247d8 outset;
+        background: -webkit-gradient(linear,left top,right bottom,color-stop(0%,#d0d1f2),
+        color-stop(50%,#4247d8),color-stop(51%,#6f72d8),color-stop(100%,#a6a9f4)
+        );
+    }
+    .c4{
+        border: 3px #727272 outset;
+        background: -webkit-gradient(linear,left top,right bottom,color-stop(0%,#dadada),
+        color-stop(50%,#727272),color-stop(51%,#909090),color-stop(100%,#c1c1c1)
+        );
+    }
+
+    .c5{
+       border: 3px #f355f3 outset;
+        background: -webkit-gradient(linear,left top,right bottom,color-stop(0%,#fbd3fb),
+        color-stop(50%,#f355f3),color-stop(51%,#f47af4),color-stop(100%,#fcb2fc)
+        );
+    }
+    .c6{
+        border: 3px #e1e1e1 outset;
+        background: -webkit-gradient(linear,left top,right bottom,color-stop(0%,#ffffff),
+        color-stop(50%,#f1f1f1),color-stop(51%,#e1e1e1),color-stop(100%,#f6f6f6)
+        );
+    }
+    .c7{
+        border: 3px #e9de07 outset;
+        background: -webkit-gradient(linear,left top,right bottom,color-stop(0%,#fefaae),
+        color-stop(50%,#f1e831),color-stop(51%,#e9de07),color-stop(100%,#fbf35b)
+        );
+    }
+    #tb{
+        border-spacing: 0;
+        border:2px gray inset;
+    }
+    #tb td{
+        box-sizing: border-box;
+        width: 17px;
+        height: 17px;
+    }
+
+    #tb .htd
+    {
+        width: 0;
+        height: 0;
+        padding: 0;
+        margin: 0;
+    }
+    #pre_table
+    {
+        width: 50%;
+        height: 100px;
+        margin-left: 25%;
+        border: 1px gray inset;
+        background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,rgba(0,
+        0,0,0.65)),color-stop(100%,rgba(0,0,0,0)));
+    }
+
+    #pre_table td {
+        box-sizing: border-box;
+        width: 25%;
+        height: 25%;
+    }
+
+</style>
+
+<div id="ter" class="row" >
+    <div id="play-panel" class="col-xs-6 col-md-6" >
+       <table class="" style="margin-left: 25%" id="tb">
+       </table>
+    </div>
+    <div id="pan" class="col-xs-3 col-md-3 panel  panel-info text-center" style="height: 100% !important;">
+        <div class="group">
+        <h2 id="lab_level"><i class="fa fa-fire"></i>Level   <span id="level">0</span> </h2>
+        </div>
+        <div class="group">
+            <h2 id="lab_score"><i class="fa fa-yen" ></i>Score   <span id="score">0</span> </h2>
+        </div>
+        <div class="group">
+        <div id="pre">
+            <table id="pre_table">
+                <tr>
+                    <td></td><td></td><td></td><td></td>
+                </tr>
+
+                <tr>
+                    <td></td><td></td><td></td><td></td>
+                </tr>
+
+                <tr>
+                    <td></td><td></td><td></td><td></td>
+                </tr>
+
+                <tr>
+                    <td></td><td></td><td></td><td></td>
+                </tr>
+            </table>
+        </div>
+        </div>
+
+        <div class="group">
+        <div ng-click="reset()" class="btn btn-danger" style="width: 100% !important;">
+            <span class="fa fa-repeat" aria-hidden="true"></span>
+            Reset
+        </div>
+       <div ng-click="pause()" ng-show="isPlaying" class="btn btn-success " style="width: 100% !important;">
+            <span class="fa fa-pause" ></span>
+            Pause
+        </div>
+        <div ng-click="play()" ng-show="!isPlaying" class="btn btn-success " style="width: 100% !important;">
+            <span class="fa fa-play" ></span>
+            Play
+        </div>
+        </div>
+
+    </div>
+</div>

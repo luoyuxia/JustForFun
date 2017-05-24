@@ -1,0 +1,23 @@
+<!--header-->
+<div class="modal-header">
+    <button ng-click="close()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true" >&times;</span>
+    </button>
+    <h4 class="modal-title" id="myModalLabel1">房间创建</h4>
+</div>
+<!--Body-->
+<div class="modal-body">
+    <div class="md-form">
+        <i class="fa  fa-wechat prefix"></i>
+        <input required type="text" id="roomname" class="form-control" ng-model="roomName">
+        <label for="roomname">请输入房间名字</label>
+    </div>
+</div>
+<div class="text-center">
+   <span class="alert-error" style="color: red !important;"> {{errormessage}} </span>
+</div>
+<!--Footer-->
+<div class="modal-footer">
+    <button type="button" class="btn btn-success" ng-click="create()">确认创建</button>
+    <button type="button" class="btn btn-warning" ng-click="close()">取消</button>
+</div>

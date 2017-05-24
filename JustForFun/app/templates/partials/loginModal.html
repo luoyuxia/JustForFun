@@ -1,0 +1,29 @@
+<!--header-->
+<div class="modal-header">
+    <button ng-click="close()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true" >&times;</span>
+    </button>
+    <h4 class="modal-title" id="myModalLabel1">登录</h4>
+</div>
+<!--Body-->
+<div class="modal-body">
+    <div class="md-form">
+        <i class="fa fa-user prefix"></i>
+        <input required type="text" id="username" class="form-control" ng-model="username">
+        <label for="username">账号</label>
+    </div>
+
+    <div class="md-form">
+        <i class="fa fa-key prefix"></i>
+        <input required type="password" id="password" class="form-control" ng-model="password">
+        <label for="password">密码</label>
+    </div>
+</div>
+<div class="text-center">
+   <span class="alert-error" style="color: red !important; background: white"> {{errormessage}} </span>
+</div>
+<!--Footer-->
+<div class="modal-footer">
+    <button type="button" class="btn btn-success" ng-click="submit()">Login</button>
+    <button type="button" class="btn btn-warning" ng-click="close()">Close</button>
+</div>

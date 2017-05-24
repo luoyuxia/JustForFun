@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../static/js/libs/jquery-3.1.0.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    var token ;
+    restfulUrl = "/api/token";
+    $.ajax({
+        url:restfulUrl,
+        success:function (data) {
+            alert("get token successufully:  "+data.token);
+            token = data.token;
+            getAPI();
+        },
+        error:function (data) {
+            alert(data);
+        },
+        beforeSend:function (req) {
+            req.setRequestHeader('Authorization', 'Basic ' + btoa('luoyuxia:134'));
+        },
+        xhrFields: {
+        withCredentials: true
+        }
+    });
+
+    function getAPI() {
+        $.ajax({
+          url: "/api/Data",
+          success:function (data) {
+              alert(data.message);
+          },
+          error:function (error) {
+              alert("failed")
+          },
+           beforeSend:function (req) {
+               req.setRequestHeader('Authorization', 'Basic ' + btoa(token+':'))
+           },
+            xhrFields: {
+            withCredentials: true
+        }
+        });
+    }
+</script>
+</body>
+</html>

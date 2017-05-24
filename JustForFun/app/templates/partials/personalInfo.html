@@ -1,0 +1,67 @@
+<div class="container" ng-show="hasLogin">
+    <div class="col-md-6 col-xs-12">
+    <div class="card testimonial-card">
+
+    <!--Bacground color-->
+    <div class="card-up default-color-dark">
+    </div>
+
+    <!--Avatar-->
+    <div class="avatar">
+        <img ng-src="{{personalImage}}"  class="rounded-circle img-responsive"/>
+        <!--<img  src="https://mdbootstrap.com/img/Photos/Avatars/img%20%288%29.jpg"
+                              class="rounded-circle img-responsive"> -->
+        <a href="javascript:">
+            <div class="mask waves-effect waves-light"></div>
+            </a>
+    </div>
+
+    <div class="card-block">
+        <!--Name-->
+        <h4 class="card-title">{{username}}</h4>
+        <hr>
+        <!--Quotation-->
+        <p><i class="fa fa-quote-left"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, adipisci</p>
+    </div>
+
+    </div>
+    </div>
+    <div class="col-md-6 col-xs-12">
+       <div class="card">
+            <div style="font-size: 20px" class="card-header green white-text">
+                 修改头像
+            </div>
+        <div class="card-block">
+            <div class="row col-md-12 col-xs-12">
+            <div id="imgPreview" class="col-md-6 col-xs-6">
+                <img ng-src="{{imgSrc}}" style=" background: white; height: 100px; width: 100px; margin-left:25%; border-radius: 50px"/>
+            </div>
+            <div class="col-md-6 col-xs-6">
+                 <form>
+                     <div class="file-field">
+                    <div class="btn btn-default btn-rounded btn-xs">
+                    <span>选择头像</span>
+                     <input id="avatarInput" accept="image/*" type="file" onchange="angular.element(this).scope().img_upload(this.files)">
+                    </div>
+                    <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text" placeholder="上传头像">
+                    </div>
+                    <button ng-click="uploadImage()" ng-class="{true: '', false: 'disabled'}[isValid]"
+                            class=" btn-xs btn  btn-primary waves-effect pull-right">
+                        上传头像
+                    </button>
+                </div>
+            </form>
+            </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container" ng-show="!hasLogin">
+    <div class="jumbotron">
+        <div class="alert alert-info" role="alert">
+         <i class="fa fa-flash big"></i> 对不起！ 你还没有登录
+        </div>
+    </div>
+</div>
