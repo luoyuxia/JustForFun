@@ -79,6 +79,7 @@
                         <img style="height: 45px;width: 45px;" ng-src="{{'/getImage/'+friend.personal_image}}" alt="好友图像">
                    </span>
                     {{friend.username}}
+                    <i ng-click="unfollow(friend,$index)" class="fa fa-lg fa-times hoverable operation pull-right" style="color: red"></i>
                     <i ng-show="friend.is_online" class="fa fa-user pull-right" style="color: green"></i>
                     <i ng-show="!friend.is_online" class="fa fa-user pull-right" style="color: gray"></i>
                 </a>
@@ -199,15 +200,15 @@
                 <div class="direct-chat-contacts">
                     <ul class="contacts-list">
                         <li>
-                            <a href="#">
-                                <img class="contacts-list-img" ng-src="{{privateChatUser.image}}" alt="User Image">
+                            <a href="javascript:">
+                                <img class="contacts-list-img" ng-src="/getImage/{{privateChatUser.personal_image}}" alt="User Image">
 
                                 <div class="contacts-list-info">
                             <span class="contacts-list-name">
-                              Count Dracula
-                              <small class="contacts-list-date pull-right">2/28/2015</small>
+                              {{privateChatUser.username}}
+                              <small class="contacts-list-date pull-right">9/01/2017</small>
                             </span>
-                                    <span class="contacts-list-msg">How have you been? I was...</span>
+                                    <span class="contacts-list-msg">你好吗？ 我...</span>
                                 </div>
                                 <!-- /.contacts-list-info -->
                             </a>

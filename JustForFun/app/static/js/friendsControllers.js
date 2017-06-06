@@ -136,6 +136,22 @@ helloWorldControllers.controller("FriendsCtrl",function ($scope,$rootScope,$http
    }).success(function (data) {
         $scope.friends = data.friends
    });
+
+   $scope.unfollow = function (user,index) {
+       $http.get("/api/unfollow/"+user.id,{
+                headers: {'Authorization': 'Basic ' + btoa(token+":")}
+            }).success(function (data) {
+                if(data.result == true)
+                {
+                    toastr.success("删除好友成功");
+                    $scope.friends.splice(index,1);
+                }
+                else
+                {
+                    toastr.warn("删除好友失败");
+                }
+         });
+   };
    $scope.sendMessage = function () {
         $http.post("/api/sendMessage",
             {
