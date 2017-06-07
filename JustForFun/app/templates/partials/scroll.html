@@ -1,0 +1,13 @@
+<style >
+    .container {
+  overflow:auto;
+  height:250px;
+}
+</style>
+<div class="container" id="parent">
+      <div class="intermidiatediv">
+        <div infinite-scroll-container="'#parent'" infinite-scroll-immediate-check="false" infinite-scroll="loadMore()" infinite-scroll-distance="0" infinite-scroll-parent="true">
+          <img ng-repeat="image in images" ng-src="http://placehold.it/225x250&text={{image}}" />
+        </div>
+      </div>
+</div>

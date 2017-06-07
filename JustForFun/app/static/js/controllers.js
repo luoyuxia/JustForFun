@@ -95,7 +95,13 @@ var helloWorldControllers = angular.module('helloWorldControllers', []).factory(
         restrict: 'A',
         link: function (scope, element, attrs, ctrls) {
             var scrollToBottom = function () {
+                if(scope.isScrollMore != undefined && !scope.isScrollMore)
                 element[0].scrollTop = element[0].scrollHeight;
+                else if(scope.isScrollMore)
+                {
+                    element[0].scrollTop = element[0].scrollHeight * 0.1;
+                    scope.isScrollMore = false;
+                }
             };
             scope.$watchCollection('messages', scrollToBottom);
             scope.$watchCollection('privateChatRecords',scrollToBottom);
@@ -205,6 +211,7 @@ helloWorldControllers.controller('LoginCtrl',['$scope','$http','$modal','$rootSc
                     }
                 });
             }
+            socket.emit('leave_private_room',$rootScope.currentUserId);
             $http.get('/api/logout', {
             headers: {'Authorization': 'Basic ' + btoa(token+":")}
             }).success(function (data) {
@@ -212,6 +219,8 @@ helloWorldControllers.controller('LoginCtrl',['$scope','$http','$modal','$rootSc
                 $rootScope.hasLogin = false;
                 $rootScope.currentUserId = 0;
                 token = "";
+                $rootScope.privateChatRecords = [];
+                $rootScope.privateChatUser = null;
                 $location.path("/");
                 $rootScope.messages = [];
                 toastr.success("退出登录成功");
@@ -727,7 +736,7 @@ function drawdata(data) {
     var option = {
         tooltip : {
         trigger: 'axis',
-        formatter: "Score : <br/>{c}"
+        formatter: "得分 : <br/>{c}"
     },
     xAxis: {
         data:years,

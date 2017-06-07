@@ -117,6 +117,13 @@ def join_private_room(userid):
     join_room(room)
     return True
 
+# 某个用户退出私人房间，不能再被其他用户私聊
+@socketio.on('leave_private_room')
+def leave_private_room(userid):
+    room = User.get_room_name_byid(userid)
+    if room is not None:
+        leave_room(room)
+
 
 @socketio.on("send_private_message")
 def send_private_message(data):
