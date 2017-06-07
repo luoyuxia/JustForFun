@@ -1,4 +1,8 @@
 <style>
+        .scroll_container {
+  overflow:auto;
+  height:300px;
+}
     hr{
         height: 1px;!important;
         margin-top: 1px;!important;
@@ -14,7 +18,7 @@
     }
     #chatContent
     {
-        height: 200px;
+        height: 300px;
         overflow: auto;
         font-size: 15px!important;
         color: black!important;
@@ -174,12 +178,10 @@
                 </div>
             </div>
             <!-- /.box-header -->
-            <div class="box-body">
-
-                <!-- Conversations are loaded here -->
-                <div class="direct-chat-messages" style="height: 300px" auto-scroll="">
-                    <!-- Message. Default to the left -->
-                    <div ng-repeat="privateChatRecord in privateChatRecords track by $index" class="direct-chat-msg" ng-class="{true: 'right', false: ''}[!privateChatRecord.isReceive]">
+            <div class="box-body ">
+                <div auto-scroll=""   class="scroll_container direct-chat-messages" id="chatContent">
+                    <div  infinite-scroll-container="'#chatContent'" infinite-scroll-immediate-check="false" infinite-scroll="loadMore()" infinite-scroll-distance="1" infinite-scroll-parent="true">
+                        <div ng-repeat="privateChatRecord in privateChatRecords track by $index" class="direct-chat-msg" ng-class="{true: 'right', false: ''}[!privateChatRecord.isReceive]">
                         <div class="direct-chat-info clearfix">
                             <span class="direct-chat-name " ng-class="{true: 'pull-right', false: 'pull-left'}[!privateChatRecord.isReceive]">{{privateChatRecord.sender.username}}</span>
                             <span class="direct-chat-timestamp" ng-class="{true: 'pull-left', false: 'pull-right'}[!privateChatRecord.isReceive]">{{privateChatRecord.sendTime}}</span>
@@ -192,7 +194,7 @@
                         </div>
                         <!-- /.direct-chat-text -->
                     </div>
-                    <!-- /.direct-chat-msg -->
+                    </div>
                 </div>
                 <!--/.direct-chat-messages-->
 

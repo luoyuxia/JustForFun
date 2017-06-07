@@ -122,6 +122,7 @@ helloWorldControllers.controller("FriendsCtrl",function ($scope,$rootScope,$http
    $scope.friends = [];
    $scope.title = "我的好友";
    $scope.message = "";
+   $scope.isScrollMore = false;
    //用户已经在聊天界面了
    $rootScope.isInChatPage = true;
    if($routeParams.sender_id != undefined)
@@ -136,6 +137,8 @@ helloWorldControllers.controller("FriendsCtrl",function ($scope,$rootScope,$http
    }).success(function (data) {
         $scope.friends = data.friends
    });
+
+
 
    $scope.unfollow = function (user,index) {
        $http.get("/api/unfollow/"+user.id,{
@@ -182,6 +185,15 @@ helloWorldControllers.controller("FriendsCtrl",function ($scope,$rootScope,$http
                 }
             });
    };
+   var hasLoaded = true;
+   $scope.loadMore = function () {
+       if(hasLoaded==false || $rootScope.privateChatUser==null)
+           return;
+     hasLoaded = false;
+     var start = $rootScope.privateChatRecords.length;
+     getMoreChatRecord(start);
+   };
+
    $scope.chatWith = function (friend) {
 
      //只做简单的url 跳转
@@ -190,6 +202,7 @@ helloWorldControllers.controller("FriendsCtrl",function ($scope,$rootScope,$http
 
    //选中某个用户后，初始化相应的信息
    function initChatData(other_id) {
+       hasLoaded = true;
        $http.get("/api/getUser/"+$routeParams.sender_id,{
            headers: {'Authorization': 'Basic ' + btoa(token+":")}
        }).success(function (data) {
@@ -202,10 +215,27 @@ helloWorldControllers.controller("FriendsCtrl",function ($scope,$rootScope,$http
          {headers: {'Authorization': 'Basic ' + btoa(token+":")}})
          .success(function (privateChatRecords) {
             $rootScope.privateChatRecords = privateChatRecords;
+            scrollToBottom();
          });
-     setTimeout(function () {
-         scrollToBottom();
-     },5);
+   }
+
+   //从start条聊天记录开始得到更多的聊天记录
+   function getMoreChatRecord(start) {
+        $http.get("/api/chatRecords/"+$rootScope.privateChatUser.id+"/"+start,
+         {headers: {'Authorization': 'Basic ' + btoa(token+":")}})
+         .success(function (privateChatRecords) {
+             hasLoaded = true;
+            if(privateChatRecords.length == 0)
+                return;
+            $scope.isScrollMore = true;
+            for(var i=privateChatRecords.length-1;i>=0;i--)
+            {
+                $rootScope.privateChatRecords.unshift(privateChatRecords[i]);
+            }
+
+         }).error(function () {
+            hasLoaded = true;
+        });
    }
 
    function scrollToBottom() {
